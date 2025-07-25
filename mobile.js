@@ -72,24 +72,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
 
     // 生日蛋糕交互
+    const candlesContainer = document.querySelector('.candles');
     const makeWishBtn = document.getElementById('make-wish');
     const blowCandlesBtn = document.getElementById('blow-candles');
 
-    makeWishBtn.addEventListener('click', () => {
-        alert('🌟 许个愿吧！愿你的每一个愿望都能实现！');
-        makeWishBtn.innerHTML = '✨ 愿望已许';
-        setTimeout(() => {
-            makeWishBtn.innerHTML = '⭐ 许愿';
-        }, 3000);
-    });
+    console.log('蜡烛容器:', candlesContainer);
+    console.log('许愿按钮:', makeWishBtn);
+    console.log('吹蜡烛按钮:', blowCandlesBtn);
 
-    blowCandlesBtn.addEventListener('click', () => {
-        alert('🎂 呼～蜡烛吹灭了！生日快乐！');
-        blowCandlesBtn.innerHTML = '🎉 蜡烛熄灭';
-        setTimeout(() => {
-            blowCandlesBtn.innerHTML = '💨 吹蜡烛';
-        }, 3000);
-    });
+    // 定义"29"数字形状的蜡烛位置 (相对于蜡烛容器的百分比位置)
+    // 移动端优化版本，适配较小的屏幕
+    const candlePositions = [
+        // 数字 "2" 的蜡烛位置 (左侧) - 14个蜡烛
+        { x: 10, y: 15 }, { x: 18, y: 15 }, { x: 26, y: 15 }, { x: 34, y: 15 }, // 顶部横线 (4个)
+        { x: 34, y: 25 }, { x: 34, y: 35 }, { x: 34, y: 45 }, // 右上竖线 (3个)
+        { x: 26, y: 55 }, { x: 18, y: 55 }, { x: 10, y: 55 }, // 中间横线 (3个)
+        { x: 10, y: 65 }, { x: 10, y: 75 }, // 左下竖线 (2个)
+        { x: 10, y: 85 }, { x: 18, y: 85 }, { x: 26, y: 85 }, { x: 34, y: 85 }, // 底部横线 (4个)
+
+        // 数字 "9" 的蜡烛位置 (右侧) - 15个蜡烛
+        { x: 55, y: 15 }, { x: 63, y: 15 }, { x: 71, y: 15 }, { x: 79, y: 15 }, // 顶部横线 (4个)
+        { x: 55, y: 25 }, { x: 55, y: 35 }, { x: 55, y: 45 }, // 左上竖线 (3个)
+        { x: 79, y: 25 }, { x: 79, y: 35 }, { x: 79, y: 45 }, // 右上竖线 (3个)
+        { x: 63, y: 55 }, { x: 71, y: 55 }, // 中间横线 (2个)
+        { x: 79, y: 65 }, { x: 79, y: 75 }, { x: 79, y: 85 }, // 右下竖线 (3个)
+    ];
+
+    // 动态生成蜡烛
+    if (candlesContainer) {
+        candlePositions.forEach((pos) => {
+            const candle = document.createElement('div');
+            candle.className = 'candle';
+            candle.style.left = `${pos.x}%`;
+            candle.style.top = `${pos.y}%`;
+
+            const flame = document.createElement('div');
+            flame.className = 'flame';
+            candle.appendChild(flame);
+
+            candlesContainer.appendChild(candle);
+        });
+        console.log('已生成', candlePositions.length, '根蜡烛，排列成"29"形状');
+    } else {
+        console.error('蜡烛容器未找到');
+    }
+
+    // 许愿按钮
+    if (makeWishBtn) {
+        makeWishBtn.addEventListener('click', () => {
+            console.log('许愿按钮被点击');
+            alert('🌟 愿你的每一个愿望都能实现！生日快乐，我的宝贝！💕');
+            makeWishBtn.innerHTML = '✨ 愿望已许';
+            setTimeout(() => {
+                makeWishBtn.innerHTML = '⭐ 许愿';
+            }, 3000);
+        });
+    }
+
+    // 吹蜡烛按钮
+    if (blowCandlesBtn) {
+        blowCandlesBtn.addEventListener('click', () => {
+            const flames = document.querySelectorAll('.flame');
+            console.log('找到火焰数量:', flames.length);
+            flames.forEach(flame => {
+                flame.classList.add('out');
+            });
+
+            blowCandlesBtn.innerHTML = '🎉 蜡烛熄灭';
+
+            // 添加一些庆祝效果
+            setTimeout(() => {
+                alert('🎉 生日快乐！愿你永远年轻美丽，幸福快乐！💖');
+                blowCandlesBtn.innerHTML = '💨 吹蜡烛';
+            }, 1000);
+        });
+    }
 
     // 音乐控制 - 简化版
     const bgMusic = document.getElementById('bgMusic');

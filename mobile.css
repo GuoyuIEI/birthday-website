@@ -214,143 +214,374 @@ button:hover, button:active {
     background-color: var(--primary-color);
 }
 
-/* 生日蛋糕 - 增强版 */
+/* 生日蛋糕 - PC端样式移植 */
 .cake-module {
     text-align: center;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: visible;
 }
 
 .cake-container {
-    padding: 2rem 0;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    perspective: 1000px;
+    position: relative;
+    transform-style: preserve-3d;
 }
 
 .cake {
     position: relative;
-    width: 220px;
-    height: 180px;
+    width: 280px;
+    height: 220px;
+    margin: 1rem auto;
+    transform-style: preserve-3d;
+    animation: cakeFloat 8s ease-in-out infinite;
 }
 
-.layer {
+@keyframes cakeFloat {
+    0%, 100% {
+        transform: translateY(0px) rotateY(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotateY(1deg);
+    }
+}
+
+.plate {
+    width: 250px;
+    height: 20px;
     position: absolute;
-    border-radius: 50%;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #fdf2e9 0%, #fef7ed 30%, #fff8f0 70%, #fdf2e9 100%);
+    border-radius: 50%;
+    box-shadow:
+        0 2px 0 #f4a261,
+        0 4px 0 #e76f51,
+        0 8px 20px rgba(231, 111, 81, 0.3),
+        inset 0 2px 4px rgba(255,255,255,0.8),
+        inset 0 -1px 3px rgba(244, 162, 97, 0.2);
+    border: 1px solid rgba(244, 162, 97, 0.3);
+    z-index: 1;
 }
 
+/* 3D立体蛋糕层 */
+.layer {
+    position: absolute;
+    left: 50%;
+    border-radius: 12px;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.15),
+        inset 0 -2px 4px rgba(0,0,0,0.1),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.4);
+}
+
+.layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: inherit;
+    transform: translateZ(-15px);
+    filter: brightness(0.75);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+/* 蛋糕层样式 */
 .layer-bottom {
-    width: 180px;
-    height: 45px;
-    background: linear-gradient(145deg, #8B4513, #D2691E);
-    bottom: 0;
-    border: 2px solid #654321;
+    width: 200px;
+    height: 50px;
+    bottom: 5px;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #ffb3ba 0%, #ffdfba 50%, #ffffba 100%);
+    z-index: 5;
 }
 
 .layer-middle {
-    width: 140px;
+    width: 150px;
     height: 40px;
-    background: linear-gradient(145deg, #CD853F, #F4A460);
-    bottom: 40px;
-    border: 2px solid #8B4513;
+    bottom: 50px;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #ffdfba 0%, #ffffba 50%, #baffc9 100%);
+    z-index: 10;
 }
 
 .layer-top {
     width: 100px;
-    height: 35px;
-    background: linear-gradient(145deg, #DEB887, #F5DEB3);
-    bottom: 75px;
-    border: 2px solid #CD853F;
+    height: 30px;
+    bottom: 85px;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #ffffba 0%, #baffc9 50%, #bae1ff 100%);
+    z-index: 12;
 }
 
-/* 蛋糕装饰奶油 */
-.layer-bottom::after {
-    content: '';
+/* 奶油装饰 */
+.icing {
     position: absolute;
-    top: -3px;
-    left: 10%;
-    right: 10%;
-    height: 6px;
-    background: linear-gradient(90deg, #FF69B4, #FFB6C1, #FF69B4);
-    border-radius: 50px;
-}
-
-.layer-middle::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 15%;
-    right: 15%;
-    height: 4px;
-    background: linear-gradient(90deg, #98FB98, #90EE90, #98FB98);
-    border-radius: 50px;
-}
-
-/* 蜡烛 */
-.candles {
-    position: absolute;
-    top: -50px;
+    bottom: 110px;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
-    height: 40px;
+    height: 20px;
+    background: linear-gradient(135deg, #fff 0%, #f8f8ff 50%, #fff 100%);
+    border-radius: 50%;
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.1),
+        inset 0 1px 2px rgba(255,255,255,0.8);
+    z-index: 13;
 }
 
-.candle {
+/* 奶油滴落效果 */
+.drip {
     position: absolute;
-    width: 6px;
-    height: 25px;
-    background: linear-gradient(180deg, #FFD700, #FFA500);
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #fff 0%, #f8f8ff 100%);
+    border-radius: 0 0 50% 50%;
+    z-index: 8;
 }
 
-.candle:nth-child(1) { left: 15px; }
-.candle:nth-child(2) { left: 30px; }
-.candle:nth-child(3) { left: 45px; }
-.candle:nth-child(4) { left: 60px; }
+.drip1 {
+    bottom: 95px;
+    left: 25%;
+    width: 12px;
+    height: 18px;
+    transform: skewY(5deg);
+}
 
-.flame {
-    position: absolute;
-    top: -12px;
+.drip2 {
+    bottom: 90px;
+    right: 25%;
+    width: 15px;
+    height: 22px;
+    transform: skewY(-8deg);
+}
+
+.drip3 {
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
+    width: 18px;
+    height: 15px;
+}
+
+/* 蜡烛容器 - 移动端优化 */
+.candles {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 100px;
+    z-index: 15;
+}
+
+/* 蜡烛样式 - 与PC端保持一致 */
+.candle {
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #8B0000 100%);
+    width: 3px;
+    height: 15px;
+    border-radius: 1.5px / 0.5px;
+    position: absolute;
+    box-shadow:
+        0 1px 3px rgba(0,0,0,0.4),
+        inset 0.3px 0 0.5px rgba(255,255,255,0.3),
+        inset -0.3px 0 0.5px rgba(0,0,0,0.4);
+    z-index: 20;
+    transform: translateX(-50%);
+}
+
+.candle::before {
+    content: "";
+    position: absolute;
+    top: -0.5px;
+    left: 0;
+    width: 3px;
+    height: 1px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #DC143C 0%, #FF1493 100%);
+    box-shadow: 0 0.5px 1px rgba(0,0,0,0.4);
+}
+
+.candle .flame {
+    position: absolute;
+    background: radial-gradient(ellipse at center bottom, #ff4500 0%, #ff8c00 30%, #ffd700 70%, #ffff99 100%);
     width: 4px;
-    height: 10px;
-    background: radial-gradient(circle, #FF4500, #FF6347, #FFD700);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    animation: flicker 1.5s infinite alternate;
+    height: 8px;
+    border-radius: 2px 2px 2px 2px / 4px 4px 2px 2px;
+    top: -8px;
+    left: 50%;
+    margin-left: -2px;
+    z-index: 25;
+    box-shadow:
+        0 0 4px rgba(255, 69, 0, 0.9),
+        0 0 8px rgba(255, 140, 0, 0.7),
+        0 0 12px rgba(255, 215, 0, 0.5);
+    transform-origin: 50% 90%;
+    animation: flicker 0.8s ease-in-out alternate infinite;
+    transition: opacity 0.5s ease;
+}
+
+.candle .flame.out {
+    opacity: 0;
+    transform: scale(0.1);
 }
 
 @keyframes flicker {
-    0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
-    100% { transform: translateX(-50%) scale(1.1) rotate(1deg); }
+    0% {
+        transform: skewX(3deg);
+        box-shadow:
+            0 0 6px rgba(255, 102, 0, 0.4),
+            0 0 12px rgba(255, 153, 0, 0.3),
+            0 0 24px rgba(255, 204, 0, 0.2);
+    }
+    25% {
+        transform: skewX(-3deg);
+        box-shadow:
+            0 0 6px rgba(255, 102, 0, 0.8),
+            0 0 12px rgba(255, 153, 0, 0.6),
+            0 0 24px rgba(255, 204, 0, 0.4);
+    }
+    50% {
+        transform: skewX(6deg);
+        box-shadow:
+            0 0 6px rgba(255, 102, 0, 0.6),
+            0 0 12px rgba(255, 153, 0, 0.4),
+            0 0 24px rgba(255, 204, 0, 0.3);
+    }
+    75% {
+        transform: skewX(-6deg);
+        box-shadow:
+            0 0 6px rgba(255, 102, 0, 0.7),
+            0 0 12px rgba(255, 153, 0, 0.5),
+            0 0 24px rgba(255, 204, 0, 0.3);
+    }
+    100% {
+        transform: skewX(3deg);
+        box-shadow:
+            0 0 6px rgba(255, 102, 0, 0.8),
+            0 0 12px rgba(255, 153, 0, 0.6),
+            0 0 24px rgba(255, 204, 0, 0.4);
+    }
 }
 
+/* 蛋糕文字装饰 */
 .cake-text {
     position: absolute;
-    bottom: 105px;
+    bottom: 120px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 11px;
-    color: #8B4513;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2px 6px;
-    border-radius: 8px;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    text-shadow:
+        1px 1px 2px rgba(0,0,0,0.4),
+        0 0 8px rgba(214, 51, 132, 0.6),
+        0 0 12px rgba(214, 51, 132, 0.3);
+    z-index: 15;
+    letter-spacing: 0.5px;
+    animation: textGlow 3s ease-in-out infinite alternate;
+    background: linear-gradient(135deg, #d63384 0%, #e91e63 50%, #d63384 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow:
+            1px 1px 2px rgba(0,0,0,0.4),
+            0 0 8px rgba(214, 51, 132, 0.6),
+            0 0 12px rgba(214, 51, 132, 0.3);
+    }
+    100% {
+        text-shadow:
+            1px 1px 2px rgba(0,0,0,0.4),
+            0 0 12px rgba(214, 51, 132, 0.8),
+            0 0 20px rgba(214, 51, 132, 0.5);
+    }
 }
 
 .cake-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
     margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
 }
 
 .cake-buttons button {
+    background: linear-gradient(135deg, #d63384 0%, #e91e63 50%, #ff6b9d 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow:
+        0 4px 15px rgba(214, 51, 132, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    min-height: 44px;
     flex: 1;
     max-width: 120px;
+}
+
+.cake-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cake-buttons button:hover::before {
+    left: 100%;
+}
+
+.cake-buttons button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        0 6px 20px rgba(214, 51, 132, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.cake-buttons button:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* 按钮波纹效果 */
+.cake-buttons button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cake-buttons button:active::after {
+    width: 200px;
+    height: 200px;
 }
 
 /* 音乐控制 */
