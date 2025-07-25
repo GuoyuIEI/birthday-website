@@ -14,7 +14,13 @@
 
 ## 🌐 在线访问
 
-访问地址：[点击这里查看网站](https://你的用户名.gitee.io/birthday-website)
+### GitHub Pages（推荐）
+- 主站：[https://guoyuiei.github.io/birthday-website/](https://guoyuiei.github.io/birthday-website/)
+- CDN优化版：[https://guoyuiei.github.io/birthday-website/cdn.html](https://guoyuiei.github.io/birthday-website/cdn.html)
+- 移动端专用：[https://guoyuiei.github.io/birthday-website/mobile.html](https://guoyuiei.github.io/birthday-website/mobile.html)
+
+### 备用地址
+- Vercel：[https://birthday-website-seven-zeta.vercel.app](https://birthday-website-seven-zeta.vercel.app)
 
 ## 🛠️ 技术栈
 

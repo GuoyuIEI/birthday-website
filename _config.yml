@@ -1,0 +1,29 @@
+# GitHub Pages 配置
+title: "生日祝福网站"
+description: "一个温馨浪漫的生日祝福网站"
+
+# 启用插件
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# 排除文件
+exclude:
+  - README.md
+  - .gitignore
+  - .github/
+  - vercel.json
+  - .vercelignore
+  - birthday-website.zip
+
+# 包含文件
+include:
+  - .htaccess
+
+# 设置
+markdown: kramdown
+highlighter: rouge
+
+# 基础URL（GitHub Pages会自动设置）
+baseurl: ""
+url: ""

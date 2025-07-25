@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- CDN预连接优化 -->
+    <meta name="dns-prefetch" content="//cdn.jsdelivr.net">
+    <meta name="dns-prefetch" content="//unpkg.com">
+    <meta name="preconnect" content="//cdn.jsdelivr.net" crossorigin>
+    <meta name="preconnect" content="//unpkg.com" crossorigin>
+    <title>给老婆的生日惊喜</title>
+    
+    <!-- 使用CDN加速CSS -->
+    <style>
+        /* 内联关键CSS以提高首屏加载速度 */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #ff9a9e 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading { 
+            text-align: center; 
+            font-size: 2rem; 
+            color: #ff6b9d; 
+        }
+        .loading-heart { 
+            font-size: 3rem; 
+            animation: pulse 1.5s infinite; 
+        }
+        @keyframes pulse { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.1); } 
+        }
+    </style>
+    
+    <!-- 异步加载完整CSS -->
+    <link rel="preload" href="mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="mobile.css"></noscript>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-heart">💖</div>
+        <p>正在为你准备惊喜...</p>
+    </div>
+
+    <!-- 异步加载完整内容 -->
+    <script>
+        // 检测移动端
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // 加载完整页面内容
+        function loadFullContent() {
+            fetch(isMobile ? 'mobile.html' : 'index.html')
+                .then(response => response.text())
+                .then(html => {
+                    // 提取body内容
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const bodyContent = doc.body.innerHTML;
+                    
+                    // 替换当前页面内容
+                    document.body.innerHTML = bodyContent;
+                    
+                    // 加载对应的JavaScript
+                    const script = document.createElement('script');
+                    script.src = isMobile ? 'mobile.js' : 'script.js';
+                    script.defer = true;
+                    document.head.appendChild(script);
+                })
+                .catch(error => {
+                    console.error('加载失败:', error);
+                    document.getElementById('loading').innerHTML = `
+                        <div class="loading-heart">😔</div>
+                        <p>加载失败，请刷新页面重试</p>
+                        <button onclick="location.reload()" style="
+                            background: #ff6b9d; 
+                            color: white; 
+                            border: none; 
+                            padding: 10px 20px; 
+                            border-radius: 20px; 
+                            font-size: 16px; 
+                            cursor: pointer;
+                            margin-top: 20px;
+                        ">刷新页面</button>
+                    `;
+                });
+        }
+
+        // 延迟加载以显示loading动画
+        setTimeout(loadFullContent, 1000);
+    </script>
+</body>
+</html>
