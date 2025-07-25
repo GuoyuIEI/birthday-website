@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleLetterBtn.addEventListener('click', () => {
         letterContent.classList.toggle('show');
         if (letterContent.classList.contains('show')) {
-            toggleLetterBtn.innerHTML = '<i class="fas fa-heart"></i> 收起信';
+            toggleLetterBtn.innerHTML = '💖 收起信';
         } else {
-            toggleLetterBtn.innerHTML = '<i class="fas fa-heart"></i> 点我，有话对你说';
+            toggleLetterBtn.innerHTML = '💖 点我，有话对你说';
         }
     });
 
@@ -163,19 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgMusic.pause();
                 musicToggle.classList.remove('playing');
                 musicToggle.classList.add('paused');
-                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                musicToggle.innerHTML = '🎵';
                 isPlaying = false;
             } else {
                 // 尝试播放音乐
                 bgMusic.play().then(() => {
                     musicToggle.classList.remove('paused');
                     musicToggle.classList.add('playing');
-                    musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                    musicToggle.innerHTML = '⏸️';
                     isPlaying = true;
                 }).catch(error => {
                     console.log('音乐播放失败:', error);
                     // 如果自动播放失败，显示提示
-                    musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+                    musicToggle.innerHTML = '▶️';
                 });
             }
         });
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bgMusic.addEventListener('ended', function() {
             musicToggle.classList.remove('playing');
             musicToggle.classList.add('paused');
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            musicToggle.innerHTML = '🎵';
             isPlaying = false;
         });
 
@@ -192,11 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             bgMusic.play().then(() => {
                 musicToggle.classList.add('playing');
-                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                musicToggle.innerHTML = '⏸️';
                 isPlaying = true;
             }).catch(error => {
                 console.log('自动播放被阻止，用户需要手动点击播放');
-                musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+                musicToggle.innerHTML = '▶️';
             });
         }, 1000);
     }

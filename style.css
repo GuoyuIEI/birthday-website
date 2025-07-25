@@ -1,5 +1,5 @@
 /* 全局样式重置与基础设置 */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* 移除Google Fonts依赖，使用系统字体以提高加载速度 */
 
 :root {
     --primary-color: #ff6b9d;
@@ -39,8 +39,21 @@ html {
     transform: translateZ(0); /* 强制硬件加速 */
 }
 
+/* 移动端性能优化 */
+@media (max-width: 767px) {
+    /* 减少移动端动画复杂度 */
+    .bubble, .star, .ribbon, .orb {
+        animation-duration: 4s; /* 减慢动画速度 */
+    }
+
+    /* 减少粒子数量 */
+    .floating-hearts .heart:nth-child(n+5) {
+        display: none;
+    }
+}
+
 body {
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: var(--background);
     color: var(--text-color);
     line-height: 1.6;

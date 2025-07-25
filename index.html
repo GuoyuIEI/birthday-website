@@ -6,9 +6,15 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- 性能优化 -->
+    <meta name="dns-prefetch" content="//vercel.app">
+    <meta name="preconnect" content="//vercel.app">
     <title>给老婆的生日惊喜</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- 移除Font Awesome CDN依赖，使用Unicode符号提高加载速度 -->
+    <!-- 预加载关键图片 -->
+    <link rel="preload" href="images/1.jpg" as="image">
+    <link rel="preload" href="audio/祝你生日快乐_爱给网_aigei_com.mp3" as="audio">
 </head>
 <body>
     <!-- 页面加载器 -->
@@ -66,7 +72,7 @@
     <!-- 音乐控制按钮 -->
     <div class="music-control">
         <button id="musicToggle" title="点击播放/暂停音乐">
-            <i class="fas fa-music"></i>
+🎵
         </button>
     </div>
 
@@ -94,7 +100,7 @@
                 <!-- 情书模块 -->
                 <div id="love-letter" class="love-letter card">
                     <h3>爱的告白</h3>
-                    <button id="toggle-letter"><i class="fas fa-heart"></i> 点我，有话对你说</button>
+                    <button id="toggle-letter">💖 点我，有话对你说</button>
                     <div id="letter-content" class="letter-content">
                         <p>亲爱的老婆：</p>
                         <p>时光像指缝里的沙，悄悄溜走又是一年。这一路隔着山海，可我这心里的地方，早就是你的了，这些年一天都没挪过窝。愿你每天醒来都有小确幸，眼角的笑纹里盛着甜；愿岁月对你格外温柔，永远都是18岁的模样；更愿你吃好睡好，无病无扰。毕竟，你若安好，我便有足够底气，去把咱俩念想的日子，过成该有的模样。</p>
@@ -131,14 +137,14 @@
                         </div>
                     </div>
                     <div class="cake-buttons">
-                        <button id="make-wish"><i class="fas fa-star"></i> 许愿</button>
-                        <button id="blow-candles"><i class="fas fa-wind"></i> 吹蜡烛</button>
+                        <button id="make-wish">⭐ 许愿</button>
+                        <button id="blow-candles">💨 吹蜡烛</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html> 
