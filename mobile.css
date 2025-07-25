@@ -161,6 +161,10 @@ button:hover, button:active {
     text-align: right;
     font-style: italic;
     color: var(--light-text);
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+    font-weight: 300;
 }
 
 /* 照片墙 - 简化版 */
