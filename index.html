@@ -20,8 +20,8 @@
     <!-- 移动端检测和重定向 -->
     <script>
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            if (window.location.pathname !== '/mobile.html') {
-                window.location.href = '/mobile.html';
+            if (!window.location.pathname.includes('mobile.html')) {
+                window.location.href = './mobile.html';
             }
         }
     </script>
